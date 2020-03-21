@@ -1,0 +1,69 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <Win32Resource />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Z:/visual studio 2019/C# project/LocrianTest/Resources/image/pianokey\backgroud1.jpg" />
+    <None Remove="Resources\backgroud1.jpg" />
+    <None Remove="Resources\image\pianokey\backgroud1.jpg" />
+    <None Remove="Resources\image\pianokey\LeftArrow.png" />
+    <None Remove="Resources\image\pianokey\PianoKeyBlack.png" />
+    <None Remove="Resources\image\pianokey\PianoKeyBlack1.png" />
+    <None Remove="Resources\image\pianokey\PianoKeyWhite.png" />
+    <None Remove="Resources\image\pianokey\PianoKeyWhite1.png" />
+    <None Remove="Resources\image\pianokey\RightArrow.png" />
+    <None Remove="Resources\LeftArrow.png" />
+    <None Remove="Resources\PianoKeyBlack.png" />
+    <None Remove="Resources\PianoKeyBlack1.png" />
+    <None Remove="Resources\PianoKeyWhite.png" />
+    <None Remove="Resources\PianoKeyWhite1.png" />
+    <None Remove="Resources\RightArrow.png" />
+    <None Remove="Z:/visual studio 2019/C# project/LocrianTest/re\backgroud1.jpg" />
+    <None Remove="Z:/visual studio 2019/C# project/LocrianTest/re\LeftArrow.png" />
+    <None Remove="Z:/visual studio 2019/C# project/LocrianTest/re\PianoKeyBlack.png" />
+    <None Remove="Z:/visual studio 2019/C# project/LocrianTest/re\PianoKeyBlack1.png" />
+    <None Remove="Z:/visual studio 2019/C# project/LocrianTest/re\PianoKeyWhite.png" />
+    <None Remove="Z:/visual studio 2019/C# project/LocrianTest/re\PianoKeyWhite1.png" />
+    <None Remove="Z:/visual studio 2019/C# project/LocrianTest/re\RightArrow.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\image\pianokey\backgroud1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\image\pianokey\LeftArrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\image\pianokey\PianoKeyBlack.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\image\pianokey\PianoKeyBlack1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\image\pianokey\PianoKeyWhite.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\image\pianokey\RightArrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\image\pianokey\PianoKeyWhite1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Locrian">
+      <HintPath>H:\Locrian\Locrian\bin\Debug\netcoreapp3.0\Locrian.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
