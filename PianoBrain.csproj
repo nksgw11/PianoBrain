@@ -34,30 +34,30 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Resources\image\pianokey\backgroud1.jpg">
+    <Resource Include="Resources\image\pianokey\backgroud1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\image\pianokey\LeftArrow.png">
+    </Resource>
+    <Resource Include="Resources\image\pianokey\LeftArrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\image\pianokey\PianoKeyBlack.png">
+    </Resource>
+    <Resource Include="Resources\image\pianokey\PianoKeyBlack.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\image\pianokey\PianoKeyBlack1.png">
+    </Resource>
+    <Resource Include="Resources\image\pianokey\PianoKeyBlack1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\image\pianokey\PianoKeyWhite.png">
+    </Resource>
+    <Resource Include="Resources\image\pianokey\PianoKeyWhite.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\image\pianokey\RightArrow.png">
+    </Resource>
+    <Resource Include="Resources\image\pianokey\RightArrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Resources\image\pianokey\PianoKeyWhite1.png">
+    <Resource Include="Resources\image\pianokey\PianoKeyWhite1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
