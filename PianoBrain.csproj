@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Z:/visual studio 2019/C# project/LocrianTest/Resources/image/pianokey\backgroud1.jpg" />
+    <None Remove="/Resources/image/pianokey\backgroud1.jpg" />
     <None Remove="Resources\backgroud1.jpg" />
     <None Remove="Resources\image\pianokey\backgroud1.jpg" />
     <None Remove="Resources\image\pianokey\LeftArrow.png" />
@@ -24,13 +24,13 @@
     <None Remove="Resources\PianoKeyWhite.png" />
     <None Remove="Resources\PianoKeyWhite1.png" />
     <None Remove="Resources\RightArrow.png" />
-    <None Remove="Z:/visual studio 2019/C# project/LocrianTest/re\backgroud1.jpg" />
-    <None Remove="Z:/visual studio 2019/C# project/LocrianTest/re\LeftArrow.png" />
-    <None Remove="Z:/visual studio 2019/C# project/LocrianTest/re\PianoKeyBlack.png" />
-    <None Remove="Z:/visual studio 2019/C# project/LocrianTest/re\PianoKeyBlack1.png" />
-    <None Remove="Z:/visual studio 2019/C# project/LocrianTest/re\PianoKeyWhite.png" />
-    <None Remove="Z:/visual studio 2019/C# project/LocrianTest/re\PianoKeyWhite1.png" />
-    <None Remove="Z:/visual studio 2019/C# project/LocrianTest/re\RightArrow.png" />
+    <None Remove="/re\backgroud1.jpg" />
+    <None Remove="/re\LeftArrow.png" />
+    <None Remove="/re\PianoKeyBlack.png" />
+    <None Remove="/re\PianoKeyBlack1.png" />
+    <None Remove="/re\PianoKeyWhite.png" />
+    <None Remove="/re\PianoKeyWhite1.png" />
+    <None Remove="/re\RightArrow.png" />
   </ItemGroup>
 
   <ItemGroup>
