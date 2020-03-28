@@ -18,6 +18,8 @@ using Locrian.Utils;
 using Locrian.Algorithm;
 using Microsoft.Win32;
 using System.Diagnostics;
+using NAudio.Wave;
+using System.IO;
 
 namespace WpfApp2Core
 {
@@ -329,16 +331,41 @@ namespace WpfApp2Core
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Title = "选择需要打开的音频文件";
-            openFileDialog.Filter = "音频文件(*.wav)|*.wav;*.flac|所有文件(*.*)|*.*";
+            openFileDialog.Filter = "音频文件(*.mp3)|*.mp3;*.wav;*.flac|所有文件(*.*)|*.*";
             var result = openFileDialog.ShowDialog();
             string path;
             if (result == true)
             {
                 path = openFileDialog.FileName;
-                KeyDetectorAsync(path);
+                if (System.IO.Path.GetExtension(path) == ".mp3")
+                    path = TransformMp3ToWaveFile(path);
+                if (File.Exists(path))
+                    KeyDetectorAsync(path);
             }
             else
                 MessageBox.Show("未知错误！", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private string TransformMp3ToWaveFile(string path)
+        {
+            string directory = System.IO.Path.GetDirectoryName(path);
+            string fileName = System.IO.Path.GetFileNameWithoutExtension(path);
+
+            string output = $@"{directory}{fileName}.wav";
+            try
+            {
+                using (var reader = new Mp3FileReader(path))
+                {
+                    WaveFileWriter.CreateWaveFile(output, reader);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("无法转换mp3为wav文件！", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                output = "";
+            }
+
+            return output;
         }
 
         private async Task KeyDetectorAsync(string file_path)
@@ -346,38 +373,39 @@ namespace WpfApp2Core
             string exe_path = "";
 
             exe_path = @".\libKeyFinder.NET.CLI\libKeyFinder.NET.CLI.exe";  // 被调exe
-            string param = $" -p \"{file_path}\"";
-            ChordNameTextBox.Text = "Comming Soon...";
-            var res = await StartProcess(exe_path, param);
-           
-            if (res.Contains("Finale"))
+            if (File.Exists(exe_path))
             {
-                var list = res.Split().Where(r => r != "" || r != string.Empty).ToList();
-                string info = list[list.Count() - 2].Trim();
-                bool isSuccessful;
-                var targetScale = ScaleFactory.GenerateScaleFromDetectorString(info, out isSuccessful);
-                if (!isSuccessful)
-                    MessageBox.Show("Unknown Error!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                string param = $" -p \"{file_path}\"";
+                ChordNameTextBox.Text = "Comming Soon...";
+                var res = await StartProcess(exe_path, param);
+
+                if (res.Contains("Finale"))
+                {
+                    var list = res.Split().Where(r => r != "" || r != string.Empty).ToList();
+                    string info = list[list.Count() - 2].Trim();
+                    bool isSuccessful;
+                    var targetScale = ScaleFactory.GenerateScaleFromDetectorString(info, out isSuccessful);
+                    if (!isSuccessful)
+                        MessageBox.Show("Unknown Error!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    else
+                    {
+                        var tmp = Common.Key2ScaleDict[info];
+                        var scaleSuffix = tmp[1] == "Nature_Major" ? "Major" : "Minor";
+                        ChordNameTextBox.Text = $"{tmp[0]}_{scaleSuffix}";
+                        DisplayScaleCore(targetScale);
+                    }
+                }
                 else
                 {
-                    var tmp = Common.Key2ScaleDict[info];
-                    var scaleSuffix = tmp[1] == "Nature_Major" ? "Major" : "Minor";
-                    ChordNameTextBox.Text = $"{tmp[0]}_{scaleSuffix}";
-                    DisplayScaleCore(targetScale);
-                }
+                    if (res == "")
+                        res = "Unknown Error!";
+                    MessageBox.Show(res, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                } 
             }
             else
             {
-                if (res == "")
-                    res = "Unknown Error!";
-                MessageBox.Show(res, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("没有找到KeyFinder.exe！", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-            //catch (Exception)
-            //{
-            //    MessageBox.Show("没有找到KeyFinder.exe！", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    return "";
-            //}
         }
 
         public async Task<string> StartProcess(string ExePath, string param)

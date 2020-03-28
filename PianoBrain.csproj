@@ -34,6 +34,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="NAudio" Version="1.10.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Locrian">
       <HintPath>H:\Locrian\Locrian\bin\Debug\netcoreapp3.0\Locrian.dll</HintPath>
     </Reference>
