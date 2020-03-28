@@ -72,7 +72,7 @@ Locrian音阶类目前支持多种不同的调式，如**中古调式**、**布�
 
 **<u>调式识别</u>**：通过听曲识调按钮可以对音频文件进行识别调式，其主要调用的后台程序为libKeyFinder.NET.CLI，地址为https://github.com/aybe/libKeyFinder.NET.CLI，主要支持的音频文件类型为WAV, FLAC, Ogg/Vorbis。本程序通过NAudio的功能额外提供了对MP3文件的支持，**如果选择了后缀为.mp3文件格式，将会自动先在相同文件夹路径下创建同名WAV文件，然后再进行识别。**识别后的结果反馈将反馈给PianoBrain程序，主窗口将显示对应的调内音阶和音阶名。*<u>注意：在这个功能下只会识别出自然大调和自然小调，暂不支持其他多种调式。</u>*
 
-![image-20200328202905087]https://github.com/nksgw11/PianoBrain/raw/master/README.assets/image-20200328202905087.png)
+![image-20200328202905087](https://github.com/nksgw11/PianoBrain/raw/master/README.assets/image-20200328202905087.png)
 
 ### **3. 和弦与琶音显示**
 
