@@ -2,7 +2,7 @@
 > A program to assist piano practitioners in learning chords and scales
 >
 
-![image-20200328181627108](https://github.com/nksgw11/PianoBrain/tree/master/README.assets/image-20200328181627108.png)
+![image-20200328181627108](https://github.com/nksgw11/PianoBrain/raw/master/README.assets/image-20200328181627108.png)
 
 一款基于.Net Core 3.0开发的钢琴和弦辅助WPF程序，提供和弦识别，音阶显示，和弦显示与调式识别功能。以下是使用到的第三方类库：
 
