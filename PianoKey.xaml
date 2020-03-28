@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp2Core"
         mc:Ignorable="d"
-        Title="PianoBrain" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
+        Title="PianoBrain" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize">
     <Window.Effect>
         <DropShadowEffect/>
     </Window.Effect>
