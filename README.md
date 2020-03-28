@@ -11,9 +11,7 @@
 
 ## **下载地址**
 
-打包好的Windows程序在这个地址里：
-
-[**PianoBrain_win_64*]: https://github.com/nksgw11/PianoBrain/releases/tag/v1.0.0
+打包好的Windows程序（PianoBrain_win_64）在这个地址里：https://github.com/nksgw11/PianoBrain/releases/tag/v1.0.0
 
 该程序需要依赖于.Net Core 3.0的框架，如果需要独立不依赖框架可以选择**PianoBrain_win_64_dotnet_core_3.0**版本程序。
 
