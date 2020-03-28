@@ -34,6 +34,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Locrian">
+      <HintPath>H:\Locrian\Locrian\bin\Debug\netcoreapp3.0\Locrian.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Resources\image\pianokey\backgroud1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -58,12 +64,6 @@
     <Resource Include="Resources\image\pianokey\PianoKeyWhite1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Locrian">
-      <HintPath>H:\Locrian\Locrian\bin\Debug\netcoreapp3.0\Locrian.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

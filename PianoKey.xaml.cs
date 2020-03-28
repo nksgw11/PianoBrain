@@ -327,53 +327,82 @@ namespace WpfApp2Core
 
         private void DetectKeyOfSong(object sender, RoutedEventArgs e)
         {
-            //OpenFileDialog openFileDialog = new OpenFileDialog();
-            //openFileDialog.Title = "选择需要打开的音频文件";
-            //openFileDialog.Filter = "音频文件(*.mp3)|*.mp3;*.wav;*.flac|所有文件(*.*)|*.*";
-            //var result = openFileDialog.ShowDialog();
-            //string path;
-            //if (result == true)
-            //{
-            //    path = openFileDialog.FileName;
-            KeyDetector();
-            //}
-            //else
-            //    MessageBox.Show("未知错误！", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "选择需要打开的音频文件";
+            openFileDialog.Filter = "音频文件(*.wav)|*.wav;*.flac|所有文件(*.*)|*.*";
+            var result = openFileDialog.ShowDialog();
+            string path;
+            if (result == true)
+            {
+                path = openFileDialog.FileName;
+                KeyDetectorAsync(path);
+            }
+            else
+                MessageBox.Show("未知错误！", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
-        private void KeyDetector()
+        private async Task KeyDetectorAsync(string file_path)
         {
             string exe_path = "";
-            try
-            {
-                exe_path = @".\KeyFinder-WIN\KeyFinder.exe";  // 被调exe
-                string[] the_args = new string[] { };   // 被调exe接受的参数
-                StartProcess(exe_path, the_args);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("没有找到KeyFinder.exe！", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
+            exe_path = @".\libKeyFinder.NET.CLI\libKeyFinder.NET.CLI.exe";  // 被调exe
+            string param = $" -p \"{file_path}\"";
+            ChordNameTextBox.Text = "Comming Soon...";
+            var res = await StartProcess(exe_path, param);
+           
+            if (res.Contains("Finale"))
+            {
+                var list = res.Split().Where(r => r != "" || r != string.Empty).ToList();
+                string info = list[list.Count() - 2].Trim();
+                bool isSuccessful;
+                var targetScale = ScaleFactory.GenerateScaleFromDetectorString(info, out isSuccessful);
+                if (!isSuccessful)
+                    MessageBox.Show("Unknown Error!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                else
+                {
+                    var tmp = Common.Key2ScaleDict[info];
+                    var scaleSuffix = tmp[1] == "Nature_Major" ? "Major" : "Minor";
+                    ChordNameTextBox.Text = $"{tmp[0]}_{scaleSuffix}";
+                    DisplayScaleCore(targetScale);
+                }
             }
+            else
+            {
+                if (res == "")
+                    res = "Unknown Error!";
+                MessageBox.Show(res, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("没有找到KeyFinder.exe！", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    return "";
+            //}
         }
 
-        public bool StartProcess(string runFilePath, params string[] args)
+        public async Task<string> StartProcess(string ExePath, string param)
         {
-            string s = "";
-            foreach (string arg in args)
+            return await Task.Run(() =>
             {
-                s = s + arg + " ";
-            }
-            s = s.Trim();
-            Process process = new Process();//创建进程对象    
-            ProcessStartInfo startInfo = new ProcessStartInfo(runFilePath, s); // 括号里是(程序名,参数)
-            process.StartInfo = startInfo;
-            //process.StartInfo.UseShellExecute = true;    //是否使用操作系统的shell启动
-            startInfo.RedirectStandardInput = true;      //接受来自调用程序的输入     
-            startInfo.RedirectStandardOutput = true;     //由调用程序获取输出信息
-            startInfo.CreateNoWindow = false;             //不显示调用程序的窗口 
-            process.Start();
-            return true;
+                string output;
+                using (Process p = new Process())
+                {
+                    ProcessStartInfo startInfo = new ProcessStartInfo(ExePath, param); // 括号里是(程序名,参数)
+                    startInfo.UseShellExecute = false;        //是否使用操作系统shell启动
+                    startInfo.RedirectStandardInput = true;   //接受来自调用程序的输入信息
+                    startInfo.RedirectStandardOutput = true;  //由调用程序获取输出信息
+                    startInfo.RedirectStandardError = true;   //重定向标准错误输出
+                    startInfo.CreateNoWindow = true;          //不显示程序窗口
+                    p.StartInfo = startInfo;
+                    p.Start();//启动程序
+
+                    //获取cmd窗口的输出信息
+                    output = p.StandardOutput.ReadToEnd();
+                    p.WaitForExit();//等待程序执行完退出进程
+                    p.Close();
+                }
+                return output;
+            });
         }
 
         private void ChordKeyChangedEvent(object sender, RoutedEventArgs e)
